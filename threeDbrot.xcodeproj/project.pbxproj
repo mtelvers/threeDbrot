@@ -12,6 +12,11 @@
 		76DB34C924E5BD3100D8C24C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DB34C824E5BD3100D8C24C /* Assets.xcassets */; };
 		76DB34CC24E5BD3100D8C24C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DB34CB24E5BD3100D8C24C /* Preview Assets.xcassets */; };
 		76DB34CF24E5BD3100D8C24C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76DB34CD24E5BD3100D8C24C /* Main.storyboard */; };
+		76DB34D824E5BE3900D8C24C /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DB34D724E5BE3900D8C24C /* MetalView.swift */; };
+		76DB34DA24E5BE6400D8C24C /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DB34D924E5BE6400D8C24C /* Renderer.swift */; };
+		76DB34DC24E5BE8A00D8C24C /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DB34DB24E5BE8A00D8C24C /* Types.swift */; };
+		76DB34DE24E5C03100D8C24C /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 76DB34DD24E5C03100D8C24C /* Shaders.metal */; };
+		76DB34E024E5C34900D8C24C /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DB34DF24E5C34900D8C24C /* Matrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		76DB34CE24E5BD3100D8C24C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76DB34D024E5BD3100D8C24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76DB34D124E5BD3100D8C24C /* threeDbrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = threeDbrot.entitlements; sourceTree = "<group>"; };
+		76DB34D724E5BE3900D8C24C /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		76DB34D924E5BE6400D8C24C /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		76DB34DB24E5BE8A00D8C24C /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		76DB34DD24E5C03100D8C24C /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		76DB34DF24E5C34900D8C24C /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,11 @@
 				76DB34D024E5BD3100D8C24C /* Info.plist */,
 				76DB34D124E5BD3100D8C24C /* threeDbrot.entitlements */,
 				76DB34CA24E5BD3100D8C24C /* Preview Content */,
+				76DB34D724E5BE3900D8C24C /* MetalView.swift */,
+				76DB34D924E5BE6400D8C24C /* Renderer.swift */,
+				76DB34DB24E5BE8A00D8C24C /* Types.swift */,
+				76DB34DD24E5C03100D8C24C /* Shaders.metal */,
+				76DB34DF24E5C34900D8C24C /* Matrix.swift */,
 			);
 			path = threeDbrot;
 			sourceTree = "<group>";
@@ -145,7 +160,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76DB34E024E5C34900D8C24C /* Matrix.swift in Sources */,
+				76DB34DE24E5C03100D8C24C /* Shaders.metal in Sources */,
+				76DB34DA24E5BE6400D8C24C /* Renderer.swift in Sources */,
+				76DB34D824E5BE3900D8C24C /* MetalView.swift in Sources */,
 				76DB34C724E5BD2F00D8C24C /* ContentView.swift in Sources */,
+				76DB34DC24E5BE8A00D8C24C /* Types.swift in Sources */,
 				76DB34C524E5BD2F00D8C24C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
