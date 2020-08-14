@@ -11,6 +11,7 @@ import MetalKit
 class MetalView: MTKView {
 
     var renderer: Renderer!
+    var computer: Computer!
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
@@ -22,6 +23,9 @@ class MetalView: MTKView {
             print(d.isHeadless)
             if d.isHeadless == false {
                 self.device = d
+            }
+            if d.isHeadless {
+                computer = Computer(device: d)
             }
         }
         

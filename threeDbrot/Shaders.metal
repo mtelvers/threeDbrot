@@ -42,3 +42,9 @@ fragment float4 basic_fragment_function(VertexOut vIn [[ stage_in ]]){
     return vIn.color;
 }
 
+
+kernel void clear_pass_func(device VertexIn* result,
+                            uint2 index [[ thread_position_in_grid ]]) {
+
+    result[index.x * 256 + index.y].position = float3(index.x, index.y, 0);
+}
