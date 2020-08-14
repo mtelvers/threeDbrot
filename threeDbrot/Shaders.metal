@@ -34,7 +34,7 @@ vertex VertexOut basic_vertex_function(const VertexIn vIn [[ stage_in ]],
 //    vOut.position.y *= cos(constants.animateBy);
 //    vOut.position.z *= cos(constants.animateBy);
     vOut.color = vIn.color;
-    vOut.pointSize = 20.0;
+    vOut.pointSize = 1.0;
     return vOut;
 }
 

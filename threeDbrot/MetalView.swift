@@ -15,13 +15,24 @@ class MetalView: MTKView {
     required init(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.device = MTLCreateSystemDefaultDevice()
+        let devices = MTLCopyAllDevices()
+        for d in devices {
+            print(d.name)
+            print(d.description)
+            print(d.isHeadless)
+            if d.isHeadless == false {
+                self.device = d
+            }
+        }
+        
+        //self.device = MTLCreateSystemDefaultDevice()
         
         self.colorPixelFormat = .bgra8Unorm
         
         self.depthStencilPixelFormat = .depth32Float
         
         self.clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 1)
+        
         
         renderer = Renderer(device: device!)
         
