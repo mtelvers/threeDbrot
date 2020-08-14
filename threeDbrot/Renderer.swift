@@ -8,6 +8,8 @@
 
 import MetalKit
 
+var vertices: [Vertex]!
+
 class Renderer: NSObject{
     
     var commandQueue: MTLCommandQueue!
@@ -17,7 +19,7 @@ class Renderer: NSObject{
     var vertexBuffer: MTLBuffer!
     var indexBuffer: MTLBuffer!
     
-    var vertices: [Vertex]!
+    
     
     var constants = Constants()
     
@@ -26,7 +28,6 @@ class Renderer: NSObject{
         buildCommandQueue(device: device)
         buildPipelineState(device: device)
         buildDepthStencilState(device: device)
-        buildVertices()
         buildBuffers(device: device)
         constants.projectionMatrix = matrix_float4x4(perspectiveDegreesFov: 45, aspectRatio: 1, nearZ: 0.1, farZ: 100)
         constants.modelMatrix.translate(direction: float3(1, 0, -5))
@@ -72,91 +73,6 @@ class Renderer: NSObject{
         depthStencilDescriptor.isDepthWriteEnabled = true
         depthStencilDescriptor.depthCompareFunction = .less
         depthStencilState = device.makeDepthStencilState(descriptor: depthStencilDescriptor)
-    }
-    
-    func buildVertices(){
-        
-        //        vertices = [
-        //            Vertex(position: float3(-1,  1,  1), color: float4(1,0,0,1)),        //v0
-        //            Vertex(position: float3(-1, -1,  1), color: float4(0,1,0,1)),        //v1
-        //            Vertex(position: float3( 1,  1,  1), color: float4(0,0,1,1)),        //v2
-        //            Vertex(position: float3( 1, -1,  1), color: float4(1,1,0,1)),        //v3
-        //            Vertex(position: float3(-1,  1, -1), color: float4(0,1,1,1)),        //v4
-        //            Vertex(position: float3( 1,  1, -1), color: float4(1,0.5,0.5,1)),    //v5
-        //            Vertex(position: float3(-1, -1, -1), color: float4(0.5,1,0,1)),      //v6
-        //            Vertex(position: float3( 1, -1, -1), color: float4(1,0,0.5,1)),      //v7
-        //        ]
-        
-        vertices = []
-        
-        var maxsequence = 0
-        var maxIm = 0
-        var minIm = 0
-        var maxRed:Float = 0
-        var minRed: Float = 0
-        var bufRe = [Int](repeating: 0, count: 1024)
-        var bufIm = [Int](repeating: 0, count: 1024)
-        for Cre: Float in stride(from: -2, through: 1, by: 0.02) {
-            for Cim: Float in stride(from: -1.5, through: 1.5, by: 0.02) {
-                var Zre: Float = 0.0
-                var Zim: Float = 0.0
-                var sequence: Int = 0
-                bufRe[0] = 0
-                bufIm[0] = 0
-                
-                var iteration: Int = 1
-                repeat {
-                    let ZNre = Zre * Zre - Zim * Zim + Cre
-                    Zim = 2 * Zre * Zim + Cim
-                    Zre = ZNre
-                    
-                    bufRe[iteration] = Int(Zre * 10000.0)
-                    bufIm[iteration] = Int(Zim * 10000.0)
-                    for i in stride(from: iteration - 1, through:0, by: -1) {
-                        if (bufRe[iteration] == bufRe[i])  && (bufIm[iteration] == bufIm[i]) {
-                            sequence = iteration - i;
-                            break;
-                        }
-                    }
-                    
-                    iteration += 1
-                } while (iteration < 1023) && (sequence == 0) && ((Zre * Zre + Zim * Zim) <= 4)
-                
-                if sequence > 0 {
-                    if sequence > maxsequence {
-                        maxsequence = sequence
-                    }
-                    for i in 0...sequence-1 {
-                        if bufIm[iteration - i] > maxIm {
-                            maxIm = bufIm[iteration - i]
-                        }
-                        if bufIm[iteration - i] < minIm {
-                            minIm = bufIm[iteration - i]
-                        }
-                        let red: Float = log(Float(abs(bufIm[iteration - i]))) / 10.0
-                        if red > maxRed {
-                            maxRed = red
-                        }
-                        if red < minRed {
-                            minRed = red
-                        }
-                        let green: Float = 0.75
-                        let blue: Float = 0.75
-                        let vertex = Vertex(position: float3(Cre, Cim, Float(bufRe[iteration - i]) / 10000.0),
-                                            color: float4(red, green, blue, 1))
-                        vertices.append(vertex)
-                    }
-                }
-            }
-        }
-        
-        print(vertices.count)
-        print(maxsequence)
-        print(maxIm)
-        print(minIm)
-        print(maxRed)
-        print(minRed)
-        
     }
     
     func buildBuffers(device: MTLDevice){
